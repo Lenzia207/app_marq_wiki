@@ -1,6 +1,6 @@
 # app_marq_wiki
 
-A new Flutter project.
+A new Flutter project!
 
 ## Getting Started
 
