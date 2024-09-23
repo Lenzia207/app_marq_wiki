@@ -1,4 +1,5 @@
 import 'package:app_marq_wiki/constants/app_color.dart';
+import 'package:app_marq_wiki/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextBox extends StatelessWidget {
@@ -17,16 +18,16 @@ class CustomTextBox extends StatelessWidget {
       alignment: alignment,
       child: Container(
         margin: const EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 20,
+          vertical: p10,
+          horizontal: p20,
         ),
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(p8),
         decoration: BoxDecoration(
           color: AppColor.white,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(p10),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(p10),
           child: Text(
             text,
           ),

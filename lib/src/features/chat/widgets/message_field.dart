@@ -1,3 +1,4 @@
+import 'package:app_marq_wiki/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -16,9 +17,9 @@ class MessageField extends HookWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        left: 20,
-        right: 20,
-        bottom: 100,
+        left: p20,
+        right: p20,
+        bottom: p100,
       ),
       child: Expanded(
         child: ListView.builder(

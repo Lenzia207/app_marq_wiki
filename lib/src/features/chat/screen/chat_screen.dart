@@ -1,4 +1,5 @@
 import 'package:app_marq_wiki/constants/app_color.dart';
+import 'package:app_marq_wiki/constants/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -28,7 +29,7 @@ class ChatScreen extends HookWidget {
         child: Stack(
           children: [
             if (chat.errorMessage.value.isNotEmpty) ...[
-              const SizedBox(height: 16),
+              const SizedBox(height: p16),
               Text(
                 chat.errorMessage.value,
                 style: const TextStyle(
@@ -52,16 +53,16 @@ class ChatScreen extends HookWidget {
                 messages: [chat.answer.value],
               ),
             Positioned(
-              bottom: 0,
-              right: 0,
-              left: 0,
+              bottom: pZero,
+              right: pZero,
+              left: pZero,
               child: Column(
                 children: [
                   if (!chat.isLoading.value && chat.answer.value.isEmpty) ...[
                     const Text(AppText.chatIntroduction),
                   ],
                   Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(p16),
                     child: CustomInputField(
                       inputController: chat.controller,
                       onSubmitted: chat.makePostRequest,

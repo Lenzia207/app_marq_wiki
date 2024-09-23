@@ -1,4 +1,5 @@
 import 'package:app_marq_wiki/constants/app_color.dart';
+import 'package:app_marq_wiki/constants/app_constants.dart';
 import 'package:app_marq_wiki/constants/app_text.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class CustomInputField extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: p10),
         child: Row(
           children: <Widget>[
             IconButton(
@@ -39,7 +40,7 @@ class CustomInputField extends StatelessWidget {
                 decoration: InputDecoration(
                   hintText: AppText.chatInputHint,
                   hintStyle: TextStyle(
-                    color: AppColor.white.withValues(alpha: 0.6),
+                    color: AppColor.white.withValues(alpha: pOpacity),
                   ),
                   border: InputBorder.none,
                 ),
