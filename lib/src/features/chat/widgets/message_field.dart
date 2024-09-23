@@ -11,7 +11,7 @@ class MessageField extends HookWidget {
     required this.messages,
   });
 
-  final List<String> messages;
+  final List<Map<String, String>> messages;
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +26,12 @@ class MessageField extends HookWidget {
           reverse: true,
           itemCount: messages.length,
           itemBuilder: (BuildContext context, int index) {
+            final message = messages[messages.length - 1 - index];
+            final isUserMessage = message['type'] == 'user';
+
             return CustomTextBox(
-              alignment: Alignment.topLeft,
-              text: messages[messages.length - 1 - index],
+              alignment: isUserMessage ? Alignment.topRight : Alignment.topLeft,
+              text: message['text']!,
             );
           },
         ),

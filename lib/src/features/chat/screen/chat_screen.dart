@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../constants/app_text.dart';
+import '../../../../utils/create_message_helper.dart';
 import '../data/chat_repository.dart';
-import '../widgets/custom_input_field.dart';
-import '../widgets/custom_text_box.dart';
+import '../widgets/user_input_field.dart';
 import '../widgets/message_field.dart';
 
 /// A screen that displays a chat interface.
@@ -17,8 +17,11 @@ class ChatScreen extends HookWidget {
   Widget build(BuildContext context) {
     final chat = ChatRepository();
 
+    debugPrint('LEZY: $chat ');
+
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
         backgroundColor: AppColor.background,
         title: const Text(
           AppText.appTitle,
@@ -28,6 +31,7 @@ class ChatScreen extends HookWidget {
         color: AppColor.background,
         child: Stack(
           children: [
+            // error Message
             if (chat.errorMessage.value.isNotEmpty) ...[
               const SizedBox(height: p16),
               Text(
@@ -37,21 +41,29 @@ class ChatScreen extends HookWidget {
                 ),
               ),
             ],
+
+            // loading Indicator
             if (chat.isLoading.value)
               const Center(
                 child: CircularProgressIndicator(
                   color: AppColor.yellow,
                 ),
               ),
-            if (chat.controller.text.isNotEmpty)
-              CustomTextBox(
-                alignment: Alignment.topRight,
-                text: chat.controller.text,
-              ),
-            if (chat.answer.value.isNotEmpty)
-              MessageField(
-                messages: [chat.answer.value],
-              ),
+
+            // message Field and Conversation
+            MessageField(
+              messages: [
+                // request User
+                if (chat.controller.text.isNotEmpty)
+                  createMessage(chat.controller.text, 'user'),
+
+                // response from the model
+                if (chat.answer.value.isNotEmpty)
+                  createMessage(chat.answer.value, 'model'),
+              ],
+            ),
+
+            // user input field
             Positioned(
               bottom: pZero,
               right: pZero,
@@ -63,7 +75,7 @@ class ChatScreen extends HookWidget {
                   ],
                   Padding(
                     padding: const EdgeInsets.all(p16),
-                    child: CustomInputField(
+                    child: UserInputField(
                       inputController: chat.controller,
                       onSubmitted: chat.makePostRequest,
                       onUploadFile: () {},

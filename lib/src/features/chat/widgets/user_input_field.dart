@@ -3,8 +3,8 @@ import 'package:app_marq_wiki/constants/app_constants.dart';
 import 'package:app_marq_wiki/constants/app_text.dart';
 import 'package:flutter/material.dart';
 
-class CustomInputField extends StatelessWidget {
-  const CustomInputField({
+class UserInputField extends StatelessWidget {
+  const UserInputField({
     super.key,
     required this.inputController,
     required this.onSubmitted,
@@ -23,16 +23,21 @@ class CustomInputField extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: p10),
+        padding: const EdgeInsets.symmetric(
+          horizontal: p10,
+        ),
         child: Row(
           children: <Widget>[
             IconButton(
-              icon: const Icon(Icons.attach_file),
+              icon: const Icon(
+                Icons.attach_file,
+              ),
               color: Colors.white,
               onPressed: onUploadFile,
             ),
             Expanded(
               child: TextField(
+                cursorColor: AppColor.white,
                 controller: inputController,
                 style: const TextStyle(
                   color: AppColor.white,
@@ -40,14 +45,18 @@ class CustomInputField extends StatelessWidget {
                 decoration: InputDecoration(
                   hintText: AppText.chatInputHint,
                   hintStyle: TextStyle(
-                    color: AppColor.white.withValues(alpha: pOpacity),
+                    color: AppColor.white.withValues(
+                      alpha: pOpacity,
+                    ),
                   ),
                   border: InputBorder.none,
                 ),
               ),
             ),
             IconButton(
-              icon: const Icon(Icons.send),
+              icon: const Icon(
+                Icons.send,
+              ),
               color: AppColor.white,
               onPressed: onSubmitted,
             ),
