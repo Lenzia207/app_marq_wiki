@@ -42,13 +42,9 @@ class UserInputField extends StatelessWidget {
                 style: const TextStyle(
                   color: AppColor.white,
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: AppText.chatInputHint,
-                  hintStyle: TextStyle(
-                    color: AppColor.white.withValues(
-                      alpha: pOpacity,
-                    ),
-                  ),
+                  hintStyle: TextStyle(color: AppColor.white),
                   border: InputBorder.none,
                 ),
               ),

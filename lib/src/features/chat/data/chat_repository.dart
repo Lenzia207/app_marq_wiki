@@ -8,6 +8,7 @@ class ChatRepository extends HookWidget {
 
   final TextEditingController controller = useTextEditingController();
   final ValueNotifier<String> answer = useState('');
+  final ValueNotifier<List<String>> sources = useState([]);
   final ValueNotifier<bool> isLoading = useState(false);
   final ValueNotifier<String> errorMessage = useState('');
 
@@ -21,10 +22,9 @@ class ChatRepository extends HookWidget {
     isLoading.value = true;
     errorMessage.value = '';
     answer.value = '';
+    sources.value = [];
 
     final url = Uri.parse('http://localhost:8000/submit_input');
-
-    debugPrint('LEZY URL: $url');
 
     // The data input to send
     Map<String, String> data = {'query_text': controller.text};
@@ -40,15 +40,16 @@ class ChatRepository extends HookWidget {
       );
 
       debugPrint('LEZY Response status code: ${response.statusCode}');
-      debugPrint('LEZY data: $data');
 
       if (response.statusCode == 200) {
         Map<String, dynamic> responseData = json.decode(response.body);
         debugPrint('Decoded response data: $responseData');
 
         if (responseData.containsKey('response_text')) {
-          if (responseData['response_text'] != null) {
+          if (responseData['response_text'] != null &&
+              responseData['sources'] != null) {
             answer.value = responseData['response_text'];
+            sources.value = List<String>.from(responseData['sources'] ?? []);
           } else {
             errorMessage.value = 'Error: response_text is null';
           }

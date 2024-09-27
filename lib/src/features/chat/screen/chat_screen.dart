@@ -17,8 +17,6 @@ class ChatScreen extends HookWidget {
   Widget build(BuildContext context) {
     final chat = ChatRepository();
 
-    debugPrint('LEZY: $chat ');
-
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
@@ -55,11 +53,20 @@ class ChatScreen extends HookWidget {
               messages: [
                 // request User
                 if (chat.controller.text.isNotEmpty)
-                  createMessage(chat.controller.text, 'user'),
+                  createMessage(
+                    chat.controller.text,
+                    null,
+                    'user',
+                  ),
 
                 // response from the model
-                if (chat.answer.value.isNotEmpty)
-                  createMessage(chat.answer.value, 'model'),
+                if (chat.answer.value.isNotEmpty &&
+                    chat.sources.value.isNotEmpty)
+                  createMessage(
+                    chat.answer.value,
+                    chat.sources.value,
+                    'model',
+                  ),
               ],
             ),
 
